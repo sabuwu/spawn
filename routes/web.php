@@ -4,12 +4,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 # - Controllers
-use App\http\Controllers\LandingController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/', [LandingController::class, 'index']);
+
+Route::get('/', function () {
+    return view("landing");
+});
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

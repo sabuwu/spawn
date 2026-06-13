@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://shiny-fortnight-qv76xp7gv4gqc9w97-8000.app.github.dev'),
 
     /*
     |--------------------------------------------------------------------------

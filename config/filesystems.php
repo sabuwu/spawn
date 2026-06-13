@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            'url' => rtrim(env('APP_URL', 'https://shiny-fortnight-qv76xp7gv4gqc9w97-8000.app.github.dev'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

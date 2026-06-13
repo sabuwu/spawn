@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spawn Launcher</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spawn: {
+                            bg: '#09090b',       // Fundo principal ultra escuro
+                            sidebar: '#121214',  // Fundo da sidebar um pouco mais claro
+                            hover: '#27272a',    // Cor de hover nos botões
+                            accent: '#ffffff',   // Branco absoluto para destaques
+                            muted: '#a1a1aa'     // Cinza para textos secundários
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Esconde a scrollbar para ficar com mais cara de app nativo... */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    </style>
+</head>
+<body class="bg-spawn-bg text-gray-100 font-sans h-screen w-screen overflow-hidden flex selection:bg-white selection:text-black">
+
+    <aside class="w-64 bg-spawn-sidebar border-r border-white/5 flex flex-col justify-between hidden md:flex">
+        
+        <div class="h-20 flex items-center px-6 border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <i class="ph-fill ph-game-controller text-2xl text-white"></i>
+                <span class="font-bold text-xl tracking-wide">SPAWN</span>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+            <p class="px-2 text-xs font-semibold text-spawn-muted uppercase tracking-wider mb-4">Loja</p>
+            
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 bg-white/10 text-white rounded-lg transition-colors font-medium">
+                <i class="ph ph-house text-xl"></i> Início
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-spawn-muted hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium">
+                <i class="ph ph-magnifying-glass text-xl"></i> Catálogo
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-spawn-muted hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium">
+                <i class="ph ph-tag text-xl"></i> Promoções
+            </a>
+
+            <p class="px-2 text-xs font-semibold text-spawn-muted uppercase tracking-wider mt-8 mb-4">Biblioteca</p>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-spawn-muted hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium">
+                <i class="ph ph-books text-xl"></i> Meus Jogos
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-spawn-muted hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium">
+                <i class="ph ph-download-simple text-xl"></i> Downloads
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-white/5">
+            @auth
+                <a href="{{ url('/dashboard') }}" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ Auth::user()->name ?? 'Player' }}" class="w-10 h-10 rounded-full bg-zinc-800">
+                    <div class="flex-1 overflow-hidden">
+                        <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name ?? 'Usuário' }}</p>
+                        <p class="text-xs text-green-400">Online</p>
+                    </div>
+                    <i class="ph ph-gear text-spawn-muted hover:text-white transition-colors"></i>
+                </a>
+            @else
+                <div class="flex flex-col gap-2">
+                    <a href="{{ route('login') }}" class="w-full text-center py-2 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition-colors">Entrar</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="w-full text-center py-2 text-sm font-medium bg-white text-black hover:bg-gray-200 rounded-lg transition-colors">Criar Conta</a>
+                    @endif
+                </div>
+            @endauth
+        </div>
+    </aside>
+
+    <main class="flex-1 relative overflow-y-auto overflow-x-hidden">
+        
+        <section class="relative w-full h-[65vh] min-h-[400px]">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 mask-image: linear-gradient(to bottom, black 50%, transparent 100%);">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-spawn-bg via-spawn-bg/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-spawn-bg via-transparent to-transparent"></div>
+
+            <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-10 flex flex-col justify-end">
+                <div class="flex gap-2 mb-4">
+                    <span class="px-2 py-1 bg-white/10 backdrop-blur-md rounded text-xs font-semibold text-white border border-white/10">Ação</span>
+                    <span class="px-2 py-1 bg-white/10 backdrop-blur-md rounded text-xs font-semibold text-white border border-white/10">RPG</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+                    NEON <br> SYNDICATE
+                </h1>
+                <p class="max-w-2xl text-lg text-gray-300 mb-8 drop-shadow-md">
+                    Explore uma metrópole cyberpunk implacável. Personalize seus implantes, monte sua equipe e descubra os segredos corporativos mais obscuros.
+                </p>
+                <div class="flex items-center gap-4">
+                    <button class="flex items-center gap-2 px-8 py-3 bg-white text-black rounded font-bold hover:bg-gray-200 transition-colors">
+                        <i class="ph-fill ph-play text-xl"></i> Obter Agora
+                    </button>
+                    <button class="flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded font-medium hover:bg-white/20 backdrop-blur-md transition-colors border border-white/5">
+                        <i class="ph ph-plus text-xl"></i> Lista de Desejos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-8 md:px-12 py-6">
+            <div class="flex justify-between items-end mb-6">
+                <h2 class="text-2xl font-bold text-white">Lançamentos</h2>
+                <a href="#" class="text-sm text-spawn-muted hover:text-white transition-colors flex items-center gap-1">Ver todos <i class="ph ph-caret-right"></i></a>
+            </div>
+
+            <div class="flex gap-4 overflow-x-auto pb-4 snap-x">
+                
+                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity backdrop-blur-[2px]">
+                            <i class="ph-fill ph-play-circle text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-white truncate group-hover:text-gray-300">Cyber Odyssey</h3>
+                    <p class="text-xs text-spawn-muted">R$ 159,90</p>
+                </div>
+
+                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
+                        <img src="https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="font-medium text-white truncate group-hover:text-gray-300">Protocol Zero</h3>
+                    <p class="text-xs text-spawn-muted">R$ 89,00</p>
+                </div>
+
+                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
+                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="font-medium text-white truncate group-hover:text-gray-300">Wasteland Drivers</h3>
+                    <p class="text-xs text-spawn-muted">Gratuito</p>
+                </div>
+                
+                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="font-medium text-white truncate group-hover:text-gray-300">Hollow System</h3>
+                    <p class="text-xs text-spawn-muted">R$ 120,00</p>
+                </div>
+                
+                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="font-medium text-white truncate group-hover:text-gray-300">Retro Grid</h3>
+                    <p class="text-xs text-spawn-muted">R$ 45,90</p>
+                </div>
+
+            </div>
+        </section>
+        
+        <div class="h-24"></div>
+
+    </main>
+
+</body>
+</html>

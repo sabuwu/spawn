@@ -7,6 +7,7 @@ services:
     container_name: spawn_app
     restart: unless-stopped
     working_dir: /var/www/html
+    command: /bin/sh -c "php artisan serve --host=0.0.0.0 --port=8000 && npm run dev"
     ports:
       - "8000:8000"
     volumes:

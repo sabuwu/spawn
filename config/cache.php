@@ -71,7 +71,7 @@ return [
             ],
             'servers' => [
                 [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'host' => env('MEMCACHED_HOST', 'https://shiny-fortnight-qv76xp7gv4gqc9w97-8000.app.github.dev'),
                     'port' => env('MEMCACHED_PORT', 11211),
                     'weight' => 100,
                 ],
