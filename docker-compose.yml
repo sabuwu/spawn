@@ -3,10 +3,12 @@ services:
   spawn_app:
     build:
       context: .
-      dockerfile: docker/app/Dockerfile # Caminho corrigido aqui
+      dockerfile: docker/app/Dockerfile
     container_name: spawn_app
     restart: unless-stopped
     working_dir: /var/www/html
+    ports:
+      - "8000:8000"
     volumes:
       - ./:/var/www/html
     networks:
@@ -28,9 +30,9 @@ services:
       - spawn_network
 
   # - Banco de dados
-  spawm_db:
+  spawn_db:
     image: postgres:15-alpine
-    container_name: spawm_db
+    container_name: spawn_db
     restart: unless-stopped
     environment:
       POSTGRES_DB: spawn_db
@@ -49,6 +51,7 @@ services:
     container_name: spawn_python_service
     restart: unless-stopped
     working_dir: /app
+    command: tail -f /dev/null
     volumes:
       - ./python_src:/app
     networks:
@@ -60,4 +63,3 @@ networks:
     
 volumes:
   db_data:
-  

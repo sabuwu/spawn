@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 # - Instalando dependências (Nomes dos pacotes corrigidos para o Alpine)
 RUN apk add --no-cache \
