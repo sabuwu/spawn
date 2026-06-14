@@ -15,19 +15,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/catalogo', function () { 
-    return view('pages.layout.catalogo'); 
+    return view('pages.layouts.catalogo'); 
 })->middleware(['auth', 'verified'])->name('catalogo');
 
 Route::get('/promocoes', function () {
-    return view('pages.layout.promocoes');
+    return view('pages.layouts.pms');
 })->middleware(['auth', 'verified'])->name('promocoes');
 
 Route::get('/biblioteca', function () { 
-    return view('pages.layout.biblioteca'); 
+    return view('pages.layouts.biblioteca'); 
 })->middleware(['auth', 'verified'])->name('biblioteca');
 
 Route::get('/downloads', function () { 
-    return view('pages.layout.downloads'); 
+    return view('pages.layouts.downloads'); 
 })->middleware(['auth', 'verified'])->name('downloads');
 
 
