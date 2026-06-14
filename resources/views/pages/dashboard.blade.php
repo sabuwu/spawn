@@ -6,7 +6,6 @@
     <title>Spawn Launcher</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
@@ -15,11 +14,11 @@
                 extend: {
                     colors: {
                         spawn: {
-                            bg: '#09090b',       // Fundo principal ultra escuro
-                            sidebar: '#121214',  // Fundo da sidebar um pouco mais claro
-                            hover: '#27272a',    // Cor de hover nos botões
-                            accent: '#ffffff',   // Branco absoluto para destaques
-                            muted: '#a1a1aa'     // Cinza para textos secundários
+                            bg: '#09090b',       
+                            sidebar: '#121214',  
+                            hover: '#27272a',    
+                            accent: '#ffffff',   
+                            muted: '#a1a1aa'     
                         }
                     }
                 }
@@ -27,16 +26,15 @@
         }
     </script>
     <style>
-        /* Esconde a scrollbar para ficar com mais cara de app nativo... */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
     </style>
 </head>
-<body class="bg-spawn-bg text-gray-100 font-sans h-screen w-screen overflow-hidden flex selection:bg-white selection:text-black">
+<body class="bg-spawn-bg text-gray-100 font-sans h-screen w-screen overflow-hidden flex flex-col md:flex-row selection:bg-white selection:text-black">
 
-    <aside class="w-64 bg-spawn-sidebar border-r border-white/5 flex flex-col justify-between hidden md:flex">
+    <aside class="w-64 bg-spawn-sidebar border-r border-white/5 flex-col justify-between hidden md:flex z-50">
         
         <div class="h-20 flex items-center px-6 border-b border-white/5">
             <div class="flex items-center gap-3">
@@ -70,13 +68,13 @@
 
         <div class="p-4 border-t border-white/5">
             @auth
-                <a href="{{ url('/dashboard') }}" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ Auth::user()->name ?? 'Player' }}" class="w-10 h-10 rounded-full bg-zinc-800">
+                <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ Auth::user()->name ?? 'Player' }}" class="w-10 h-10 rounded-full bg-zinc-800 ring-2 ring-transparent group-hover:ring-spawn-muted transition-all">
                     <div class="flex-1 overflow-hidden">
                         <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name ?? 'Usuário' }}</p>
                         <p class="text-xs text-green-400">Online</p>
                     </div>
-                    <i class="ph ph-gear text-spawn-muted hover:text-white transition-colors"></i>
+                    <i class="ph ph-gear text-spawn-muted group-hover:text-white group-hover:rotate-90 transition-all duration-300"></i>
                 </a>
             @else
                 <div class="flex flex-col gap-2">
@@ -89,7 +87,7 @@
         </div>
     </aside>
 
-    <main class="flex-1 relative overflow-y-auto overflow-x-hidden">
+    <main class="flex-1 relative overflow-y-auto overflow-x-hidden pb-20 md:pb-0">
         
         <section class="relative w-full h-[65vh] min-h-[400px]">
             <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 mask-image: linear-gradient(to bottom, black 50%, transparent 100%);">
@@ -108,18 +106,18 @@
                 <p class="max-w-2xl text-lg text-gray-300 mb-8 drop-shadow-md">
                     Explore uma metrópole cyberpunk implacável. Personalize seus implantes, monte sua equipe e descubra os segredos corporativos mais obscuros.
                 </p>
-                <div class="flex items-center gap-4">
-                    <button class="flex items-center gap-2 px-8 py-3 bg-white text-black rounded font-bold hover:bg-gray-200 transition-colors">
+                <div class="flex flex-wrap items-center gap-4">
+                    <button class="flex items-center gap-2 px-8 py-3 bg-white text-black rounded font-bold hover:bg-gray-200 transition-colors w-full sm:w-auto justify-center">
                         <i class="ph-fill ph-play text-xl"></i> Obter Agora
                     </button>
-                    <button class="flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded font-medium hover:bg-white/20 backdrop-blur-md transition-colors border border-white/5">
+                    <button class="flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded font-medium hover:bg-white/20 backdrop-blur-md transition-colors border border-white/5 w-full sm:w-auto justify-center">
                         <i class="ph ph-plus text-xl"></i> Lista de Desejos
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="px-8 md:px-12 py-6">
+        <section class="px-4 md:px-12 py-6">
             <div class="flex justify-between items-end mb-6">
                 <h2 class="text-2xl font-bold text-white">Lançamentos</h2>
                 <a href="#" class="text-sm text-spawn-muted hover:text-white transition-colors flex items-center gap-1">Ver todos <i class="ph ph-caret-right"></i></a>
@@ -127,7 +125,7 @@
 
             <div class="flex gap-4 overflow-x-auto pb-4 snap-x">
                 
-                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                <div class="w-36 md:w-44 flex-shrink-0 snap-start group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
                         <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity backdrop-blur-[2px]">
@@ -138,7 +136,7 @@
                     <p class="text-xs text-spawn-muted">R$ 159,90</p>
                 </div>
 
-                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                <div class="w-36 md:w-44 flex-shrink-0 snap-start group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
                         <img src="https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
@@ -146,7 +144,7 @@
                     <p class="text-xs text-spawn-muted">R$ 89,00</p>
                 </div>
 
-                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                <div class="w-36 md:w-44 flex-shrink-0 snap-start group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
                         <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
@@ -154,7 +152,7 @@
                     <p class="text-xs text-spawn-muted">Gratuito</p>
                 </div>
                 
-                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                <div class="w-36 md:w-44 flex-shrink-0 snap-start group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
                         <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
@@ -162,7 +160,7 @@
                     <p class="text-xs text-spawn-muted">R$ 120,00</p>
                 </div>
                 
-                <div class="w-44 flex-shrink-0 snap-start group cursor-pointer">
+                <div class="w-36 md:w-44 flex-shrink-0 snap-start group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 border border-white/5 group-hover:border-white/30 transition-all">
                         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
@@ -173,9 +171,31 @@
             </div>
         </section>
         
-        <div class="h-24"></div>
+        <div class="hidden md:block h-24"></div>
 
     </main>
+
+    <nav class="md:hidden fixed bottom-0 w-full bg-spawn-bg/90 backdrop-blur-lg border-t border-white/5 flex justify-around items-center px-2 py-3 z-50">
+        <a href="#" class="text-white flex flex-col items-center gap-1 p-2">
+            <i class="ph-fill ph-house text-2xl"></i>
+        </a>
+        <a href="#" class="text-spawn-muted hover:text-white transition-colors flex flex-col items-center gap-1 p-2">
+            <i class="ph ph-magnifying-glass text-2xl"></i>
+        </a>
+        <a href="#" class="text-spawn-muted hover:text-white transition-colors flex flex-col items-center gap-1 p-2">
+            <i class="ph ph-books text-2xl"></i>
+        </a>
+        
+        @auth
+            <a href="{{ route('profile.edit') }}" class="w-10 h-10 rounded-full overflow-hidden border-2 border-transparent hover:border-spawn-muted transition-colors ml-2">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ Auth::user()->name ?? 'Player' }}" class="w-full h-full bg-zinc-800">
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="text-spawn-muted hover:text-white transition-colors flex flex-col items-center gap-1 p-2 ml-2">
+                <i class="ph ph-sign-in text-2xl"></i>
+            </a>
+        @endauth
+    </nav>
 
 </body>
 </html>
